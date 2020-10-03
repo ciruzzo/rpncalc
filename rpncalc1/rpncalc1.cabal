@@ -34,6 +34,7 @@ library
       src
   build-depends:
       base >=4.7 && <5
+    , text
   default-language: Haskell2010
 
 executable rpncalc1-exe
@@ -46,7 +47,6 @@ executable rpncalc1-exe
   build-depends:
       base >=4.7 && <5
     , rpncalc1
-    , text
     , haskeline
   default-language: Haskell2010
 
@@ -61,4 +61,5 @@ test-suite rpncalc1-test
   build-depends:
       base >=4.7 && <5
     , rpncalc1
+    , HUnit
   default-language: Haskell2010

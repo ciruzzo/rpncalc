@@ -34,6 +34,9 @@ library
       src
   build-depends:
       base >=4.7 && <5
+    , transformers
+    , mtl
+    , text
   default-language: Haskell2010
 
 executable rpncalc2-exe
@@ -46,10 +49,7 @@ executable rpncalc2-exe
   build-depends:
       base >=4.7 && <5
     , rpncalc2
-    , text
     , haskeline
-    , transformers
-    , mtl
   default-language: Haskell2010
 
 test-suite rpncalc2-test
@@ -63,4 +63,5 @@ test-suite rpncalc2-test
   build-depends:
       base >=4.7 && <5
     , rpncalc2
+    , HUnit
   default-language: Haskell2010

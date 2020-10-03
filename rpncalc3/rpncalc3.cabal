@@ -34,6 +34,10 @@ library
       src
   build-depends:
       base >=4.7 && <5
+    , text
+    , transformers
+    , mtl
+    , attoparsec
   default-language: Haskell2010
 
 executable rpncalc3-exe
@@ -46,11 +50,7 @@ executable rpncalc3-exe
   build-depends:
       base >=4.7 && <5
     , rpncalc3
-    , text
     , haskeline
-    , transformers
-    , mtl
-    , attoparsec
   default-language: Haskell2010
 
 test-suite rpncalc3-test
@@ -64,4 +64,5 @@ test-suite rpncalc3-test
   build-depends:
       base >=4.7 && <5
     , rpncalc3
+    , HUnit
   default-language: Haskell2010
