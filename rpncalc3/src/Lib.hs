@@ -2,6 +2,11 @@
 
 module Lib
     ( rpncalc
+     ,rev
+     ,Exp (..)
+     ,Ops (..)
+     ,pExp
+     ,showParseResult
     ) where
 
 import Data.Text (pack, unpack, splitOn, Text, split, intercalate)
@@ -14,7 +19,7 @@ import Data.List (reverse)
 
 -- 'reversed' RPN expression
 data Ops = Plus | Minus | Multiply | Divide deriving (Eq,Show)
-data Exp = Val Double | Expr Ops Exp Exp  deriving Show
+data Exp = Val Double | Expr Ops Exp Exp  deriving (Eq,Show)
 
 pOps :: Parser Ops
 pOps = (string "+ " >> return Plus) <|> 
@@ -41,11 +46,14 @@ calcExp (Expr op ex1 ex2)
   | op == Multiply = (calcExp ex2) * (calcExp ex1)
   | op == Divide   = (calcExp ex2) / (calcExp ex1)
 
-rpncalc :: String -> Maybe Double
+showParseResult :: Show a => Result a -> Either String a
+showParseResult (Done _ r) = Right r
+showParseResult r          = Left $ show r
+
+rpncalc :: String -> Double
 rpncalc input = do
-               let res = parse pExp (rev $ " "++input) `feed` ""
-               case res of
-                 Done i ex -> Just $ calcExp ex
-                 Fail i s str -> error $ "error: parse failed " ++ show i ++ show s ++ show str
-                 _ -> Nothing
+                let res = showParseResult $ parse pExp (rev $ " "++input) `feed` ""
+                case res of 
+                  Right r -> calcExp $ r 
+                  Left  r -> error $ "error: parse failed " ++ r
 

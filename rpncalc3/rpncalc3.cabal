@@ -63,4 +63,6 @@ test-suite rpncalc3-test
       base >=4.7 && <5
     , rpncalc3
     , HUnit
+    , text
+    , attoparsec
   default-language: Haskell2010
